@@ -6,7 +6,7 @@ from telegram.ext import Application, MessageHandler, filters, ContextTypes
 # --- CONFIGURACIÓN ---
 TOKEN_TELEGRAM = "8742607552:AAH6ESb97z7fLROC8aZFZzvgaOc0U3xHUZQ"
 LAPTOP_IP = "100.96.246.102"  # IP de Tailscale de tu laptop
-API_KEY = "panchibolo123"      # La que probaste en PowerShell
+API_KEY = "panchibolo1234"      # La que probaste en PowerShell
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
