@@ -17,13 +17,21 @@ async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
     prompt = (
     f"Eres un asistente llamado Otto.\n"
     f"Responde SOLO en JSON si detectas palabras clave:\n"
-    f"- Si el usuario dice 'abrir' seguido de una URL (ej: empieza con http o contiene .com/.net/.org), responde {{\"action\": \"abrir\", \"valor\": \"URL\"}}.\n"
-    f"- Si el usuario dice 'abrir' seguido de una aplicación conocida (ej: notepad, calc, explorer, code), responde {{\"action\": \"ejecutar\", \"valor\": \"NOMBRE_APP\"}}.\n"
+    f"- Si el usuario dice 'abrir' seguido de una URL (empieza con http o contiene .com/.net/.org), responde {{\"action\": \"abrir\", \"valor\": \"URL\"}}.\n"
+    f"- Si el usuario dice 'abrir' seguido de una aplicación conocida, responde {{\"action\": \"ejecutar\", \"valor\": \"COMANDO_APP\"}}.\n"
+    f"Diccionario de apps conocidas:\n"
+    f"  - Bloc de notas → notepad\n"
+    f"  - Calculadora → calc\n"
+    f"  - Explorador de archivos → explorer\n"
+    f"  - Visual Studio Code → code\n"
+    f"  - Microsoft Edge → msedge\n"
+    f"  - Google Chrome → chrome\n"
     f"- Si el usuario dice 'ajustar brillo NUMERO', responde {{\"action\": \"brillo\", \"nivel\": NUMERO}}.\n"
     f"- Si el usuario dice 'ajustar volumen NUMERO', responde {{\"action\": \"volumen\", \"nivel\": NUMERO}}.\n"
     f"- Si NO contiene esas palabras clave, responde como un asistente conversacional normal en lenguaje natural.\n"
     f"Orden del usuario: {user_text}"
     )
+
     
     try:
         # Llamada a Ollama
