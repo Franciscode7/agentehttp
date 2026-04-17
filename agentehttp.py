@@ -15,14 +15,16 @@ async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Prompt con palabras clave
     prompt = (
-        f"Eres un asistente llamado Otto.\n"
-        f"Si el texto contiene la palabra 'abrir', responde SOLO en JSON con {{\"action\": \"abrir\", \"valor\": \"APP_O_URL\"}}.\n"
-        f"Si el texto contiene 'ajustar' y 'brillo', responde SOLO en JSON con {{\"action\": \"brillo\", \"nivel\": NUMERO}}.\n"
-        f"Si el texto contiene 'ajustar' y 'volumen', responde SOLO en JSON con {{\"action\": \"volumen\", \"nivel\": NUMERO}}.\n"
-        f"Si NO contiene esas palabras clave, responde como un asistente conversacional normal en lenguaje natural.\n"
-        f"Orden del usuario: {user_text}"
+    f"Eres un asistente llamado Otto.\n"
+    f"Responde SOLO en JSON si detectas palabras clave:\n"
+    f"- Si el usuario dice 'abrir' seguido de una URL (ej: empieza con http o contiene .com/.net/.org), responde {{\"action\": \"abrir\", \"valor\": \"URL\"}}.\n"
+    f"- Si el usuario dice 'abrir' seguido de una aplicación conocida (ej: notepad, calc, explorer, code), responde {{\"action\": \"ejecutar\", \"valor\": \"NOMBRE_APP\"}}.\n"
+    f"- Si el usuario dice 'ajustar brillo NUMERO', responde {{\"action\": \"brillo\", \"nivel\": NUMERO}}.\n"
+    f"- Si el usuario dice 'ajustar volumen NUMERO', responde {{\"action\": \"volumen\", \"nivel\": NUMERO}}.\n"
+    f"- Si NO contiene esas palabras clave, responde como un asistente conversacional normal en lenguaje natural.\n"
+    f"Orden del usuario: {user_text}"
     )
-
+    
     try:
         # Llamada a Ollama
         res_ollama = requests.post(OLLAMA_URL, json={
