@@ -17,7 +17,7 @@ async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
     prompt = (
     f"Eres un asistente llamado Otto.\n"
     f"Responde SOLO en JSON si detectas palabras clave:\n"
-    f"- Si el usuario dice 'abrir' seguido de una URL (empieza con http o contiene .com/.net/.org), responde {{\"action\": \"abrir\", \"valor\": \"URL\"}}.\n"
+    f"- Si el usuario dice 'abrir' seguido de una URL (empieza con http o contiene dominios como .com, .net, .org, .mx, .es), responde {{\"action\": \"abrir\", \"valor\": \"URL\"}}.\n"
     f"- Si el usuario dice 'abrir' seguido de una aplicación conocida, responde {{\"action\": \"ejecutar\", \"valor\": \"COMANDO_APP\"}}.\n"
     f"Diccionario de apps conocidas:\n"
     f"  - Bloc de notas → notepad\n"
@@ -26,13 +26,18 @@ async def manejar_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE):
     f"  - Visual Studio Code → code\n"
     f"  - Microsoft Edge → msedge\n"
     f"  - Google Chrome → chrome\n"
-    f"- Si el usuario dice 'ajustar brillo NUMERO', responde {{\"action\": \"brillo\", \"nivel\": NUMERO}}.\n"
-    f"- Si el usuario dice 'ajustar volumen NUMERO', responde {{\"action\": \"volumen\", \"nivel\": NUMERO}}.\n"
+    f"- Si el usuario dice 'ajustar o subir o bajar brillo NUMERO', responde {{\"action\": \"brillo\", \"nivel\": NUMERO}}.\n"
+    f"- Si el usuario dice 'ajustar o subir o bajarvolumen NUMERO', responde {{\"action\": \"volumen\", \"nivel\": NUMERO}}.\n"
     f"- Si NO contiene esas palabras clave, responde como un asistente conversacional normal en lenguaje natural.\n"
+    f"Ejemplos:\n"
+    f"  Usuario: 'abrir YouTube' → {{\"action\":\"abrir\",\"valor\":\"https://www.youtube.com\"}}\n"
+    f"  Usuario: 'abrir bloc de notas' → {{\"action\":\"ejecutar\",\"valor\":\"notepad\"}}\n"
+    f"  Usuario: 'ajustar brillo 40' → {{\"action\":\"brillo\",\"nivel\":40}}\n"
+    f"  Usuario: 'ajustar volumen 20' → {{\"action\":\"volumen\",\"nivel\":20}}\n"
+    f"  Usuario: 'hola Otto' → 'Hola, ¿cómo estás?'\n"
     f"Orden del usuario: {user_text}"
-    )
+)
 
-    
     try:
         # Llamada a Ollama
         res_ollama = requests.post(OLLAMA_URL, json={
